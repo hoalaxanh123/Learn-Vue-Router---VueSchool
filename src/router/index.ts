@@ -1,5 +1,7 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import HomeView from "@/views/HomeView.vue";
+import NotFound from "@/views/NotFound.vue";
+import ErrorPage from "@/views/ErrorPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,18 +10,30 @@ const routes: Array<RouteRecordRaw> = [
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/destination/:slug",
+    props: true,
+    name: "DetailPage",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "location" */ "@/views/DetailPage.vue"),
+    children: [
+      {
+        path: ":experienceSlug",
+        name: "Experience",
+        props: true,
+        component: () =>
+          import(
+            /* webpackChunkName: "location" */ "@/components/ExprerienceDetail.vue"
+          ),
+      },
+    ],
   },
+  { path: "/error", name: "ErrorPage", component: ErrorPage },
+  { path: "/:pathMatch(.*)*", component: NotFound },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  linkExactActiveClass: "vue-exact-class",
+  history: createWebHistory(),
   routes,
 });
 
