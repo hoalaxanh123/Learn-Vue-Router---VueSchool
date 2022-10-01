@@ -1,7 +1,12 @@
 <template>
   <!-- Header -->
   <the-navigation />
-  <router-view />
+
+  <router-view v-slot="{ Component }" :key="$route.params.slug">
+    <transition name="my-transition">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <script lang="ts">
@@ -18,7 +23,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  animation: test 0.3s ease-in;
+  /* animation: test 0.3s ease-in; */
 }
 img {
   box-shadow: 0 10px 3px 0 rgb(0 0 0 / 16%), 0 35px 38px 0 rgb(0 0 0 / 19%);
@@ -78,5 +83,18 @@ button {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.my-transition-enter-active,
+.my-transition-leave-active {
+  /* transition: all 0.3s ease-in; */
+  transition: all 0.3s ease-in-out;
+}
+
+.my-transition-enter-from,
+.my-transition-leave-to {
+  /* opacity: 0; */
+  transform: translateY(2rem);
+  opacity: 0;
 }
 </style>

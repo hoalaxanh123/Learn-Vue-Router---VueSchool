@@ -24,7 +24,6 @@ export default {
     },
   },
   setup(props: { slug: string; experienceSlug: string }) {
-    console.log("props :>> ", props);
     const destination = computed(() => {
       return (
         store.destinations.find((x) => x.slug === props.slug) || {

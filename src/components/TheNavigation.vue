@@ -11,11 +11,24 @@
     >
       {{ location.name }}
     </router-link>
+    |
+
+    <router-link :to="{ name: 'LoginPage' }" v-if="isLogged !== '1'"
+      >Login</router-link
+    >
+    <router-link :to="{ name: 'AdminHome' }" v-if="isLogged === '1'"
+      >Admin</router-link
+    >
+    <router-link :to="{ name: 'LogoutPage' }" v-if="isLogged === '1'"
+      >Logout</router-link
+    >
   </nav>
 </template>
 
 <script setup lang="ts">
 import store from "@/data/store";
+import { ref } from "vue";
+const isLogged = ref(localStorage.getItem("is_logged"));
 </script>
 
 <style scoped>

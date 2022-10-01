@@ -1,5 +1,9 @@
 <template>
-  <h1>500 Server error</h1>
+  <div>
+    <h2>Oops!</h2>
+    <h3>There are something wrong when process you request!</h3>
+    <router-link :to="{ name: 'home' }">Go home</router-link>
+  </div>
 </template>
 
 <script lang="ts">

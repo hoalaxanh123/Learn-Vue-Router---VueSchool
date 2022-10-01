@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>404 Not found</h1>
+    <h2>Oops!</h2>
+    <h3>The resource you are looking for does not exist!</h3>
+    <router-link :to="{ name: 'home' }">Go home</router-link>
   </div>
 </template>
 
